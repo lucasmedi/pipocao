@@ -1,0 +1,21 @@
+﻿@model Web.Models.RankingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model.Result.Any())
+{
+    <ul>
+        @foreach (var item in Model.Result)
+        {
+            <li>
+                @Html.LabelForModel(item.Filme.Titulo)
+                @Html.LabelForModel(item.Nota) 
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <h3>Nenhum filme encontrado!</h3>
+}

@@ -1,0 +1,34 @@
+﻿@model Web.Models.ComentarioViewModel
+
+@{
+    ViewBag.Title ="Comentário sobre " + Model.Filme.Titulo;
+}
+
+<h2>Comentário sobre @(Model.Filme.Titulo)</h2>
+
+<fieldset>
+    <legend>Comentario</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Nota): @Html.DisplayFor(model => model.Nota)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Texto): @Html.DisplayFor(model => model.Texto)
+    </div>
+
+    @if (Model.Gostei)
+    {
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Gostei) :D
+        </div>
+    }
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Data): @Html.DisplayFor(model => model.Data)
+    </div>
+</fieldset>
+
+<p>
+    @Html.ActionLink("Voltar para Meus Filmes", "Index", "Filme")
+</p>

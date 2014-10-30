@@ -1,0 +1,11 @@
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\FluentNHibernate.dll
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\Iesi.Collections.dll
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\NHibernate.dll
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\FluentNHibernate.xml
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\Iesi.Collections.xml
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\NHibernate.xml
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\obj\Debug\Services.csprojResolveAssemblyReference.cache
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\Services.dll
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\bin\Debug\Services.pdb
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\obj\Debug\Services.dll
+C:\Users\Lucas\Desktop\psa-tf\trunk\projeto\psa-tf\DAL\obj\Debug\Services.pdb

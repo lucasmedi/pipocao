@@ -1,0 +1,109 @@
+﻿@model Web.Models.FilmeViewModel
+
+@{
+    ViewBag.Title = "Detalhes do Filme";
+}
+
+<h2>@(Model.Titulo)</h2>
+
+@if (!string.IsNullOrEmpty(Model.UrlImagem))
+{
+    <a href="@(Model.UrlImagem)" target="_blank">
+        <img src="@(Model.UrlImagem)" alt="Poster" />
+    </a>
+}
+
+<fieldset>
+    <legend>Detalhes do Filme</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TmdbId): @Html.DisplayFor(model => model.TmdbId)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Descricao): @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.UrlTrailer))
+    {
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.UrlTrailer): <a href="@(Model.UrlTrailer ?? "javascript:void(0);")" target="_blank">Link Externo</a>
+        </div>
+    }
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TipoMidia): @Html.DisplayFor(model => model.TipoMidia)
+    </div>
+
+    @if (Model.FilmeTMDb != null)
+    {
+        <h3>Popularidade</h3>
+        
+        <div class="display-label">
+            Nota: @(Math.Round(Model.FilmeTMDb.Popularity, 2))
+        </div>
+        
+        <div class="display-label">
+            Média dos Votos: @(Model.FilmeTMDb.VoteAverage)
+        </div>
+        
+        <div class="display-label">
+            Número de Votos: @(Model.FilmeTMDb.VoteCount)
+        </div>
+        
+        <h3>Mais informações</h3>
+        
+        <div class="display-label">
+            Situação: @(Model.FilmeTMDb.Status)
+        </div>
+        
+        if (Model.FilmeTMDb.ReleaseDate.HasValue)
+        {
+            <div class="display-label">
+                Data de Lançamento: @(Model.FilmeTMDb.ReleaseDate.Value.ToString("dd/MM/yyyy"))
+            </div>
+        }
+        
+        if (Model.FilmeTMDb.Runtime.HasValue && Model.FilmeTMDb.Runtime > 0)
+        {
+            <div class="display-label">
+                Duração: @(Model.FilmeTMDb.Runtime.Value) minutos
+            </div>
+        }
+        
+        if (!string.IsNullOrEmpty(Model.FilmeTMDb.Tagline))
+        {
+            <div class="display-label">
+                Citação: "@(Model.FilmeTMDb.Tagline)"
+            </div>
+        }
+        
+        if (!string.IsNullOrEmpty(Model.FilmeTMDb.Homepage))
+        {
+            <div class="display-label">
+                Site: <a href="@(Model.FilmeTMDb.Homepage)" target="_blank">@(Model.FilmeTMDb.Homepage)</a>
+            </div>
+        }
+        
+        if (Model.FilmeTMDb.Budget > 0)
+        {
+            <div class="display-label">
+                Orçamento: @(Model.FilmeTMDb.Budget.ToString("C", new System.Globalization.CultureInfo("en-US")))
+            </div>
+        }
+
+        if (Model.FilmeTMDb.Revenue > 0)
+        {
+            <div class="display-label">
+                Rendimentos: @(Model.FilmeTMDb.Revenue.ToString("C", new System.Globalization.CultureInfo("en-US")))
+            </div>
+        }
+    }
+
+</fieldset>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Excluir", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Confirma exclusão do filme " + Model.Titulo + "?');" }) |
+    @Html.ActionLink("Voltar para Meus Filmes", "Index")
+</p>

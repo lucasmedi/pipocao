@@ -1,0 +1,37 @@
+﻿@model Web.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Meus Filmes";
+}
+
+<style>
+    .searchInput {
+        padding: 17px;
+        padding-left: 55px;
+        width: 300px;
+        border: 1px solid #f5f5f5;
+        font-size: 13px;
+        color: gray;
+        background-image: url('http://i47.tinypic.com/r02vbq.png');
+        background-repeat: no-repeat;
+        background-position: left center;
+        outline: 0;
+    }
+</style>
+
+<h2>Meus Filmes</h2>
+
+@using (Html.BeginForm("Index", "Filme"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.TextBoxFor(o => o.Titulo, new { @class = "searchInput" })
+    </fieldset>
+}
+
+@Html.Partial("SearchResult", Model.Result)
+
+<p>
+    @Html.ActionLink("Cadastrar novo filme", "Create")
+</p>

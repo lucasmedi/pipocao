@@ -1,0 +1,56 @@
+﻿@model Web.Models.ComentarioViewModel
+
+@{
+    ViewBag.Title = "Comente sobre " + Model.Filme.Titulo;
+}
+
+<h2>Comente sobre @(Model.Filme.Titulo)</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Comentario</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nota)
+        </div>
+        <div class="editor-field">
+            @{
+                var list = new List<int>() { 5, 4, 3, 2, 1 };
+            }
+
+            @Html.DropDownList("Nota", new SelectList(list, 3))
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Texto)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Texto, new { @class = "textDescription" })
+            @Html.ValidationMessageFor(model => model.Texto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gostei)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Gostei)
+        </div>
+
+        @Html.HiddenFor(o => Model.FilmeId)
+
+        <p>
+            <input type="submit" value="Salvar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar para Meus Filmes", "Index", "Filme")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

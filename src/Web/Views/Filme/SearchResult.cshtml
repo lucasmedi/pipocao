@@ -1,0 +1,28 @@
+﻿@model Web.Models.FilmeViewModel[]
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.Titulo, "Details", new { @id = item.Id })
+                | Comentário: 
+                @if (item.Comentarios.Any())
+                {
+                    @Html.ActionLink("ver", "Details", "Comentario", new { id = item.Comentarios[0].Id }, null)
+                    @(" ou ")
+                    @Html.ActionLink("excluir", "Delete", "Comentario", new { id = item.Comentarios[0].Id }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Comentar", "Create", "Comentario", new { filmeId = item.Id }, null)
+                }
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <h3>Nenhum filme encontrado!</h3>
+}
