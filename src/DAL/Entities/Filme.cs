@@ -14,13 +14,13 @@ namespace DAL.Entities
         public virtual string Descricao { get; set; }
         public virtual string UrlImagem { get; set; }
         public virtual string UrlTrailer { get; set; }
-		public virtual TipoMidia TipoMidia { get; set; }
+        public virtual TipoMidia TipoMidia { get; set; }
 
-		public virtual int UsuarioId { get; set; }
+        public virtual int UsuarioId { get; set; }
         public virtual IUsuario Usuario { get; set; }
 
         private IList<IComentario> _comentarios;
-		public virtual IList<IComentario> Comentarios { get { return _comentarios.ToList().AsReadOnly(); } set { _comentarios = value; } }
+        public virtual IList<IComentario> Comentarios { get { return _comentarios.ToList().AsReadOnly(); } set { _comentarios = value; } }
 
         public Filme()
         {
@@ -33,7 +33,9 @@ namespace DAL.Entities
             comentario.Usuario = usuario;
 
             if (!_comentarios.Contains(comentario))
+            {
                 this._comentarios.Add(comentario);
+            }
         }
-	}
+    }
 }

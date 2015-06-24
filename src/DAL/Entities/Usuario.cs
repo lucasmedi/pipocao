@@ -2,10 +2,10 @@
 
 namespace DAL.Entities
 {
-	public class Usuario : IUsuario
-	{
-		public virtual int Id { get; set; }
-		public virtual string Nome { get; set; }
-		public virtual string Email { get; set; }
-	}
+    public class Usuario : IUsuario
+    {
+        public virtual int Id { get; set; }
+        public virtual string Nome { get; set; }
+        public virtual string Email { get; set; }
+    }
 }

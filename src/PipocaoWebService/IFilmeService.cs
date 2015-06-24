@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text;
-using DAL.Classes;
 using PipocaoWebService.Classes;
-
 
 namespace PipocaoWebService
 {
@@ -15,8 +9,6 @@ namespace PipocaoWebService
     [ServiceContract]
     public interface IFilmeService
     {
-       
-
         [OperationContract]
         [WebGet(UriTemplate = "/buscaFilmes", ResponseFormat = WebMessageFormat.Xml)]
         List<Filme> buscaFilmes();
@@ -24,6 +16,5 @@ namespace PipocaoWebService
         [OperationContract]
         [WebGet(UriTemplate = "/buscaComentariosPorFilme/{titulo}", ResponseFormat = WebMessageFormat.Xml)]
         List<Comentario> buscaComentariosPorFilme(string titulo);
-
     }
 }

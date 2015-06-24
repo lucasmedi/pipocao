@@ -4,122 +4,123 @@ using System.Linq;
 using System.Linq.Expressions;
 using DAL.Infrastructure;
 using NHibernate;
-using NHibernate.Criterion;
 using NHibernate.Linq;
 
 namespace DAL.Services
 {
-	public class Repository<T, TKey> : IPersistRepository<T>, ISearchRepository<T, TKey> where T : class, IEntityKey<TKey>
-	{
-		internal readonly ISession _session;
+    public class Repository<T, TKey> : IPersistRepository<T>, ISearchRepository<T, TKey> where T : class, IEntityKey<TKey>
+    {
+        internal readonly ISession _session;
 
-		public Repository(ISession session)
-		{
-			_session = session;
-		}
+        public Repository(ISession session)
+        {
+            _session = session;
+        }
 
-		public IQueryable<T> All()
-		{
-			return _session.Query<T>();
-		}
+        public IQueryable<T> All()
+        {
+            return _session.Query<T>();
+        }
 
-		public T FindBy(Expression<Func<T, bool>> expression)
-		{
-			return FilterBy(expression).SingleOrDefault();
-		}
+        public T FindBy(Expression<Func<T, bool>> expression)
+        {
+            return FilterBy(expression).SingleOrDefault();
+        }
 
-		public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression, Expression<Func<T, object>> orderBy = null)
-		{
-			var query = All().Where(expression);
+        public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression, Expression<Func<T, object>> orderBy = null)
+        {
+            var query = All().Where(expression);
 
-			if (orderBy != null)
-				query.OrderBy(orderBy);
-				
-			return query.AsQueryable();
-		}
+            if (orderBy != null)
+            {
+                query.OrderBy(orderBy);
+            }
 
-		public T FindBy(TKey id)
-		{
-			return _session.Get<T>(id);
-		}
+            return query.AsQueryable();
+        }
 
-		public T[] QueryOver(Expression<Func<T>> query)
-		{
-			return _session.QueryOver<T>(query).List().ToArray();
-		}
+        public T FindBy(TKey id)
+        {
+            return _session.Get<T>(id);
+        }
 
-		public bool Add(T entity)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				_session.Save(entity);
+        public T[] QueryOver(Expression<Func<T>> query)
+        {
+            return _session.QueryOver<T>(query).List().ToArray();
+        }
 
-				transaction.Commit();
-			}
+        public bool Add(T entity)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Save(entity);
 
-			return true;
-		}
+                transaction.Commit();
+            }
 
-		public bool Add(IEnumerable<T> entities)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				foreach (T entity in entities)
-					_session.Save(entity);
+            return true;
+        }
 
-				transaction.Commit();
-			}
+        public bool Add(IEnumerable<T> entities)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                foreach (T entity in entities)
+                    _session.Save(entity);
 
-			return true;
-		}
+                transaction.Commit();
+            }
 
-		public bool Update(T entity)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				_session.Merge(entity);
+            return true;
+        }
 
-				transaction.Commit();
-			}
+        public bool Update(T entity)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Merge(entity);
 
-			return true;
-		}
+                transaction.Commit();
+            }
 
-		public bool Delete(object id)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				_session.Delete(_session.Load(typeof(T), id));
+            return true;
+        }
 
-				transaction.Commit();
-			}
+        public bool Delete(object id)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Delete(_session.Load(typeof(T), id));
 
-			return true;
-		}
+                transaction.Commit();
+            }
 
-		public bool Delete(T entity)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				_session.Delete(entity);
+            return true;
+        }
 
-				transaction.Commit();
-			}
+        public bool Delete(T entity)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Delete(entity);
 
-			return true;
-		}
+                transaction.Commit();
+            }
 
-		public bool Delete(IEnumerable<T> entities)
-		{
-			using (var transaction = _session.BeginTransaction())
-			{
-				foreach (T entity in entities)
-					_session.Delete(entity);
+            return true;
+        }
 
-				transaction.Commit();
-			}
+        public bool Delete(IEnumerable<T> entities)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                foreach (T entity in entities)
+                    _session.Delete(entity);
 
-			return true;
-		}
-	}
+                transaction.Commit();
+            }
+
+            return true;
+        }
+    }
 }

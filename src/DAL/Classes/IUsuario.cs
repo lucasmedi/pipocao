@@ -2,9 +2,9 @@
 
 namespace DAL.Classes
 {
-	public interface IUsuario : IEntityKey<int>
-	{
-		string Nome { get; set; }
-		string Email { get; set; }
-	}
+    public interface IUsuario : IEntityKey<int>
+    {
+        string Nome { get; set; }
+        string Email { get; set; }
+    }
 }

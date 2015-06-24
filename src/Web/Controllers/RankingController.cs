@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DAL.Repositories;
 using Web.Models;
@@ -10,12 +7,12 @@ namespace Web.Controllers
 {
     public class RankingController : Controller
     {
-		private IComentarioRepository repository;
+        private IComentarioRepository repository;
 
-		public RankingController(IComentarioRepository repo)
-		{
-			repository = repo;
-		}
+        public RankingController(IComentarioRepository repo)
+        {
+            repository = repo;
+        }
 
         // GET: /Ranking/
         public ActionResult Index()
@@ -24,7 +21,7 @@ namespace Web.Controllers
             {
                 Result = repository.GetMostValuableMovies().Select(o => ComentarioViewModel.ToModel(o)).ToArray()
             };
-            
+
             return View(viewModel);
         }
     }
